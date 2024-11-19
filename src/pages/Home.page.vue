@@ -1,7 +1,13 @@
 <script setup lang="ts"></script>
 
 <template>
-	<div>home page</div>
+	<div :class="$style.homePage"></div>
 </template>
 
-<style lang="scss" module></style>
+<style lang="scss" module>
+.homePage {
+	background-color: red;
+	height: 100%;
+	width: 100%;
+}
+</style>

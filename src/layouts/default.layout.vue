@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PanelBottom from '@/components/PanelBottom.vue';
 import PanelTop from '@/components/PanelTop.vue';
 </script>
 
@@ -7,6 +8,8 @@ import PanelTop from '@/components/PanelTop.vue';
 		<PanelTop />
 
 		<slot />
+
+		<PanelBottom />
 	</div>
 </template>
 
@@ -16,12 +19,12 @@ import PanelTop from '@/components/PanelTop.vue';
 	flex-direction: column;
 	align-items: center;
 	gap: 18px;
-	margin-top: 52px;
+	padding-top: 52px;
 	width: 100%;
 	height: 100%;
 
 	@media screen and (min-width: vars.$minDesktopWidth) {
-		margin-top: 0px;
+		padding-top: 0px;
 		align-items: end;
 		margin-left: auto;
 		max-width: 400px;
