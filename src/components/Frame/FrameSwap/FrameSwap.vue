@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import ButtonAsset from '@/components/ButtonAsset.vue';
+import AssetBalance from '@/components/Asset/AssetBalance.vue';
+import AssetButton from '@/components/Asset/AssetButton.vue';
 import { useAssetMeta } from '@/hooks';
 
 const assetMeta = useAssetMeta();
@@ -9,12 +10,12 @@ const asset = assetMeta.getAssetMetaByKey('BNB');
 
 <template>
 	<div :class="$style.frameSwap">
-		<ButtonAsset :asset="asset" />
+		<AssetButton :asset="asset" />
+		<AssetBalance :balance="14762.5" />
 	</div>
 </template>
 
 <style lang="scss" module>
 .frameSwap {
-	width: 400px;
 }
 </style>
