@@ -1,13 +1,21 @@
 <script setup lang="ts">
 import IconArrow from 'assets/icons/arrow.svg?component';
 
-defineProps<{
+const props = defineProps<{
 	asset: AssetMeta;
 }>();
+
+const emit = defineEmits<{
+	click: [asset: AssetMeta];
+}>();
+
+function onClick() {
+	emit('click', props.asset);
+}
 </script>
 
 <template>
-	<button :class="$style.buttonAsset">
+	<button :class="$style.buttonAsset" @click="onClick">
 		<div :class="$style.asset">
 			<Component :is="asset.icon" :class="$style.iconAsset" />
 			<span :class="$style.assetKey">{{ asset.key }}</span>
