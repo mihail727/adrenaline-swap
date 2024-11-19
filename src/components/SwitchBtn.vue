@@ -1,0 +1,86 @@
+<script setup lang="ts">
+import { SwitchButtonState } from '@/common/enum';
+
+const selectedState = defineModel<SwitchButtonState>('selectedState', { required: true });
+
+function onClickBtn(ev: MouseEvent) {
+	const target = ev.target as HTMLButtonElement;
+	const targetId = Number(target.id);
+	const targetAsState = SwitchButtonState[targetId] as keyof typeof SwitchButtonState | undefined;
+
+	if (!targetAsState) {
+		return;
+	}
+
+	selectedState.value = targetId;
+}
+</script>
+
+<template>
+	<div :class="$style.switchBtn">
+		<span :class="[$style.switcher, $style[`${SwitchButtonState[selectedState]}`]]" />
+
+		<button
+			id="0"
+			:class="[$style.btn, selectedState === 0 && $style.selected]"
+			@click="onClickBtn"
+		>
+			Swap
+		</button>
+		<button
+			id="1"
+			:class="[$style.btn, selectedState === 1 && $style.selected]"
+			@click="onClickBtn"
+		>
+			Pool
+		</button>
+	</div>
+</template>
+
+<style lang="scss" module>
+.switchBtn {
+	position: relative;
+	display: flex;
+	border-radius: 30px;
+	background-color: #210707;
+	width: 100%;
+	overflow: hidden;
+}
+
+.switcher {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%;
+	height: 100%;
+	background-color: #dd2f2f;
+	z-index: 1;
+	transition: left 0.2s ease, border-radius 0.3s ease;
+
+	&.Swap {
+		left: 0;
+		border-radius: 30px 0px 0px 30px;
+	}
+
+	&.Pool {
+		left: 50%;
+		border-radius: 0px 30px 30px 0px;
+	}
+}
+
+.btn {
+	width: 100%;
+	color: rgba($color: white, $alpha: 0.6);
+	padding: 10px;
+	background-color: transparent;
+	font-size: 20px;
+	transition: color 0.4s ease, transform 0.2s ease;
+	cursor: pointer;
+	z-index: 2;
+
+	&:hover,
+	&.selected {
+		color: rgba($color: white, $alpha: 1);
+	}
+}
+</style>
