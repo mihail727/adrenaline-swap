@@ -27,8 +27,8 @@ import PanelTop from '@/components/PanelTop.vue';
 		padding-top: 0px;
 		align-items: end;
 		margin-left: auto;
-		max-width: 400px;
 		overflow: visible;
+		width: vars.$frameWidth;
 	}
 }
 </style>

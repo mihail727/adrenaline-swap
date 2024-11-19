@@ -23,7 +23,7 @@ import HeartIcon from '@/assets/icons/heart.svg';
 
 .text {
 	font-size: 16px;
-	color: rgba(255, 255, 255, 0.7);
+	color: rgba(colors.$white, 0.7);
 }
 
 .heartIcon {

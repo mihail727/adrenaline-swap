@@ -100,3 +100,11 @@ textarea {
 	box-sizing: border-box;
 	padding: 0;
 }
+
+button {
+	cursor: pointer;
+
+	&:disabled {
+		cursor: default;
+	}
+}

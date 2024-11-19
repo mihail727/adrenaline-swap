@@ -17,7 +17,7 @@ function onClickBtn(ev: MouseEvent) {
 </script>
 
 <template>
-	<div :class="$style.switchBtn">
+	<div :class="$style.buttonSwitch">
 		<span :class="[$style.switcher, $style[`${SwitchButtonState[selectedState]}`]]" />
 
 		<button
@@ -38,11 +38,11 @@ function onClickBtn(ev: MouseEvent) {
 </template>
 
 <style lang="scss" module>
-.switchBtn {
+.buttonSwitch {
 	position: relative;
 	display: flex;
 	border-radius: 30px;
-	background-color: #210707;
+	background-color: colors.$darkRed;
 	width: 100%;
 	overflow: hidden;
 }
@@ -53,7 +53,7 @@ function onClickBtn(ev: MouseEvent) {
 	left: 0;
 	width: 50%;
 	height: 100%;
-	background-color: #dd2f2f;
+	background-color: colors.$red;
 	z-index: 1;
 	transition: left 0.2s ease, border-radius 0.3s ease;
 
@@ -70,17 +70,16 @@ function onClickBtn(ev: MouseEvent) {
 
 .btn {
 	width: 100%;
-	color: rgba($color: white, $alpha: 0.6);
+	color: rgba(colors.$white, $alpha: 0.6);
 	padding: 10px;
 	background-color: transparent;
 	font-size: 20px;
 	transition: color 0.4s ease, transform 0.2s ease;
-	cursor: pointer;
 	z-index: 2;
 
 	&:hover,
 	&.selected {
-		color: rgba($color: white, $alpha: 1);
+		color: rgba(colors.$white, $alpha: 1);
 	}
 }
 </style>
