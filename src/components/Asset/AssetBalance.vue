@@ -7,7 +7,7 @@ const props = defineProps<{
 	assetBalance: number | string;
 }>();
 
-const formattedBalance = computed(() => formatNumberWithCommas(props.assetBalance));
+const formattedBalance = computed(() => formatNumberWithCommas(props.assetBalance, 2));
 </script>
 
 <template>
