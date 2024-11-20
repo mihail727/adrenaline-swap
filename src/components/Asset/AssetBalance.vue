@@ -2,10 +2,16 @@
 import { formatNumberWithCommas } from '@/helpers';
 import { computed } from 'vue';
 
-const props = defineProps<{
-	assetKey: AssetKey;
-	assetBalance: number | string;
-}>();
+const props = withDefaults(
+	defineProps<{
+		assetKey?: string;
+		assetBalance?: number | string;
+	}>(),
+	{
+		assetKey: 'Unselected',
+		assetBalance: 0,
+	},
+);
 
 const formattedBalance = computed(() => formatNumberWithCommas(props.assetBalance, 2));
 </script>

@@ -7,10 +7,11 @@ const inputValue = defineModel<number | undefined>();
 
 const props = withDefaults(
 	defineProps<{
-		assetKey: AssetKey;
+		assetKey?: string;
 		assetBalance?: number;
 	}>(),
 	{
+		assetKey: '???',
 		assetBalance: 0,
 	},
 );

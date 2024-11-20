@@ -5,27 +5,33 @@ import AssetInput from './AssetInput.vue';
 
 const inputValue = defineModel<number | undefined>('inputValue');
 
-defineProps<{
-	asset: Asset;
-}>();
+withDefaults(
+	defineProps<{
+		asset?: Asset;
+		selected?: boolean;
+	}>(),
+	{
+		selected: false,
+	},
+);
 
 const emit = defineEmits<{
-	click: [asset: AssetMeta];
+	click: [asset?: AssetMeta];
 }>();
 
-function onClick(asset: AssetMeta) {
+function onClick(asset?: AssetMeta) {
 	emit('click', asset);
 }
 </script>
 
 <template>
-	<div :class="$style.assetBlock">
+	<div :class="[$style.assetBlock, selected && $style.selected]">
 		<div :class="$style.infoWrapper">
 			<AssetButton :asset="asset" @click="onClick" />
-			<AssetBalance :asset-key="asset.key" :assetBalance="asset.balance" />
+			<AssetBalance :asset-key="asset?.key" :assetBalance="asset?.balance" />
 		</div>
 
-		<AssetInput v-model="inputValue" :asset-key="asset.key" :asset-balance="asset.balance" />
+		<AssetInput v-model="inputValue" :asset-key="asset?.key" :asset-balance="asset?.balance" />
 	</div>
 </template>
 
@@ -34,6 +40,11 @@ function onClick(asset: AssetMeta) {
 	display: flex;
 	flex-direction: column;
 	gap: 14px;
+
+	&.selected > :not(.infoWrapper) {
+		transition: opacity 0.3s ease;
+		opacity: 0.5;
+	}
 }
 
 .infoWrapper {

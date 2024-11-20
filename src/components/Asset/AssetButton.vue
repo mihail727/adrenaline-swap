@@ -1,13 +1,26 @@
 <script setup lang="ts">
 import IconArrow from 'assets/icons/arrow.svg?component';
+import { computed } from 'vue';
 
 const props = defineProps<{
-	asset: AssetMeta;
+	asset?: AssetMeta;
 }>();
 
 const emit = defineEmits<{
-	click: [asset: AssetMeta];
+	click: [asset?: AssetMeta];
 }>();
+
+const computedAsset = computed(() => {
+	if (!props.asset) {
+		return {
+			key: 'Unselected',
+			name: 'Unselected',
+			icon: null,
+		};
+	}
+
+	return props.asset;
+});
 
 function onClick() {
 	emit('click', props.asset);
@@ -23,9 +36,9 @@ function onClick() {
 			:leave-active-class="$style.transitionChangeAssetActive"
 			mode="out-in"
 		>
-			<div :key="asset.key" :class="$style.asset">
-				<Component :is="asset.icon" :class="$style.iconAsset" />
-				<span :class="$style.assetKey">{{ asset.key }}</span>
+			<div :key="computedAsset.key" :class="$style.asset">
+				<Component :is="computedAsset.icon" :class="$style.iconAsset" />
+				<span :class="$style.assetKey">{{ computedAsset.key }}</span>
 			</div>
 		</Transition>
 

@@ -20,6 +20,36 @@ export const useAssetMeta = () => {
 			name: 'Bitcoin',
 			icon: markRaw(IconTokenBTC),
 		},
+		{
+			key: 'BNB2',
+			name: 'BNB',
+			icon: markRaw(IconTokenBNB),
+		},
+		{
+			key: 'ETH2',
+			name: 'Ether',
+			icon: markRaw(IconTokenETH),
+		},
+		{
+			key: 'BTC2',
+			name: 'Bitcoin',
+			icon: markRaw(IconTokenBTC),
+		},
+		{
+			key: 'BNB3',
+			name: 'BNB',
+			icon: markRaw(IconTokenBNB),
+		},
+		{
+			key: 'ETH3',
+			name: 'Ether',
+			icon: markRaw(IconTokenETH),
+		},
+		{
+			key: 'BTC3',
+			name: 'Bitcoin',
+			icon: markRaw(IconTokenBTC),
+		},
 	];
 
 	function getAssetMetaByKey(key: AssetKey) {
