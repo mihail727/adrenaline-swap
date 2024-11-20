@@ -23,13 +23,35 @@ function onClickReplace() {
 
 <template>
 	<div :class="$style.frameSwapMain">
-		<AssetBlock v-if="firstAsset" :asset="firstAsset" @click="onClickBlock" />
+		<Transition
+			:leave-active-class="$style.transitionReplaceAssetActive"
+			:leave-to-class="$style.transitionReplaceAssetDown"
+			mode="out-in"
+		>
+			<AssetBlock
+				v-if="firstAsset"
+				:key="firstAsset.key"
+				:asset="firstAsset"
+				@click="onClickBlock"
+			/>
+		</Transition>
 
 		<button :class="$style.btnReplace" @click="onClickReplace">
 			<IconArrowCircle :class="$style.iconArrowCircle" />
 		</button>
 
-		<AssetBlock v-if="secondAsset" :asset="secondAsset" @click="onClickBlock" />
+		<Transition
+			:leave-active-class="$style.transitionReplaceAssetActive"
+			:leave-to-class="$style.transitionReplaceAssetUp"
+			mode="out-in"
+		>
+			<AssetBlock
+				v-if="secondAsset"
+				:key="secondAsset.key"
+				:asset="secondAsset"
+				@click="onClickBlock"
+			/>
+		</Transition>
 
 		<FrameSwapOptions :class="$style.frameSwapOptions" />
 
@@ -38,12 +60,15 @@ function onClickReplace() {
 </template>
 
 <style lang="scss" module>
+$iconArrowCircleWidth: 31px;
+$framSwapMainGap: 14px;
+
 .frameSwapMain {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 	flex-shrink: 0;
-	gap: 14px;
+	gap: $framSwapMainGap;
 
 	@media screen and (min-width: vars.$minDesktopWidth) {
 		width: vars.$frameWidth;
@@ -67,7 +92,7 @@ function onClickReplace() {
 }
 
 .iconArrowCircle {
-	width: 31px;
+	width: $iconArrowCircleWidth;
 	height: auto;
 }
 
@@ -88,5 +113,17 @@ function onClickReplace() {
 	&:active {
 		transform: scale(0.9);
 	}
+}
+
+.transitionReplaceAssetActive {
+	transition: all 0.3s ease;
+}
+
+.transitionReplaceAssetDown {
+	transform: translateY(calc(100% + $iconArrowCircleWidth + $framSwapMainGap * 2));
+}
+
+.transitionReplaceAssetUp {
+	transform: translateY(calc(-100% - $iconArrowCircleWidth - $framSwapMainGap * 2));
 }
 </style>
