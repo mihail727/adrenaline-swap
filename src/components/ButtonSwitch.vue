@@ -41,6 +41,7 @@ function onClickBtn(ev: MouseEvent) {
 .buttonSwitch {
 	position: relative;
 	display: flex;
+	flex-shrink: 0;
 	border-radius: 30px;
 	background-color: colors.$darkRed;
 	width: 100%;

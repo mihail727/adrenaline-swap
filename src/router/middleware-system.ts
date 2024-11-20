@@ -1,10 +1,10 @@
 import type { NavigationGuardNext, RouteRecordNormalized } from 'vue-router';
-import { layoutsMiddleware } from './middlewares';
+import { layoutsMiddleware, startupMiddleware } from './middlewares';
 
 /**
  * Глобальные middlewares срабатывающие перед каждом роутом
  */
-const globalMiddlewares: Middleware[] = [layoutsMiddleware];
+const globalMiddlewares: Middleware[] = [startupMiddleware, layoutsMiddleware];
 
 /**
  * Функция-фабрика последовательно запускает цепочку Middleware

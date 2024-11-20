@@ -3,16 +3,26 @@ import { formatNumberWithCommas } from '@/helpers';
 import { computed } from 'vue';
 
 const props = defineProps<{
-	balance: number | string;
+	assetKey: AssetKey;
+	assetBalance: number | string;
 }>();
 
-const formattedBalance = computed(() => formatNumberWithCommas(props.balance));
+const formattedBalance = computed(() => formatNumberWithCommas(props.assetBalance));
 </script>
 
 <template>
 	<div :class="$style.balanceInfo">
 		<span :class="$style.header">Balance</span>
-		<span :class="$style.balance">{{ formattedBalance }}</span>
+
+		<Transition
+			:enter-active-class="$style.transitionChangeAssetActive"
+			:leave-active-class="$style.transitionChangeAssetActive"
+			:enter-from-class="$style.transitionChangeAssetEnter"
+			:leave-to-class="$style.transitionChangeAssetLeave"
+			mode="out-in"
+		>
+			<span :key="assetKey" :class="$style.balance">{{ formattedBalance }}</span>
+		</Transition>
 	</div>
 </template>
 
@@ -34,5 +44,19 @@ const formattedBalance = computed(() => formatNumberWithCommas(props.balance));
 
 .balance {
 	font-size: 18px;
+}
+
+.transitionChangeAssetActive {
+	transition: all 0.3s ease;
+}
+
+.transitionChangeAssetEnter {
+	transform: translateY(-50%);
+	opacity: 0;
+}
+
+.transitionChangeAssetLeave {
+	transform: translateY(50%);
+	opacity: 0;
 }
 </style>

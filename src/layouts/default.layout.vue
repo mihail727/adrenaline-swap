@@ -5,11 +5,11 @@ import PanelTop from '@/components/PanelTop.vue';
 
 <template>
 	<div :class="$style.defaultLayout">
-		<PanelTop />
+		<PanelTop :class="$style.panelTop" />
 
 		<slot />
 
-		<PanelBottom />
+		<PanelBottom :class="$style.panelBottom" />
 	</div>
 </template>
 
@@ -19,16 +19,25 @@ import PanelTop from '@/components/PanelTop.vue';
 	flex-direction: column;
 	align-items: center;
 	gap: 18px;
-	padding-top: 52px;
+	padding: 52px 20px 20px 20px;
 	width: 100%;
 	height: 100%;
+	overflow: auto;
 
 	@media screen and (min-width: vars.$minDesktopWidth) {
-		padding-top: 0px;
+		padding: 20px;
 		align-items: end;
 		margin-left: auto;
-		overflow: visible;
+	}
+}
+
+.panelTop {
+	@media screen and (min-width: vars.$minDesktopWidth) {
 		width: vars.$frameWidth;
 	}
+}
+
+.panelBottom {
+	margin-top: auto;
 }
 </style>

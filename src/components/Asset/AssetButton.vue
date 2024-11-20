@@ -16,10 +16,18 @@ function onClick() {
 
 <template>
 	<button :class="$style.buttonAsset" @click="onClick">
-		<div :class="$style.asset">
-			<Component :is="asset.icon" :class="$style.iconAsset" />
-			<span :class="$style.assetKey">{{ asset.key }}</span>
-		</div>
+		<Transition
+			:enter-from-class="$style.transitionChangeAssetEnter"
+			:leave-to-class="$style.transitionChangeAssetLeave"
+			:enter-active-class="$style.transitionChangeAssetActive"
+			:leave-active-class="$style.transitionChangeAssetActive"
+			mode="out-in"
+		>
+			<div :key="asset.key" :class="$style.asset">
+				<Component :is="asset.icon" :class="$style.iconAsset" />
+				<span :class="$style.assetKey">{{ asset.key }}</span>
+			</div>
+		</Transition>
 
 		<IconArrow :class="$style.iconArrow" />
 	</button>
@@ -41,6 +49,7 @@ function onClick() {
 	display: flex;
 	align-items: center;
 	gap: 8px;
+	transition: all 0.6s ease;
 }
 
 .iconAsset {
@@ -56,5 +65,19 @@ function onClick() {
 	width: 10px;
 	height: auto;
 	margin-left: auto;
+}
+
+.transitionChangeAssetActive {
+	transition: all 0.3s ease;
+}
+
+.transitionChangeAssetEnter {
+	transform: translateY(-50%);
+	opacity: 0;
+}
+
+.transitionChangeAssetLeave {
+	transform: translateY(50%);
+	opacity: 0;
 }
 </style>

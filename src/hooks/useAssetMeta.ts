@@ -1,36 +1,33 @@
 import IconTokenBNB from 'assets/icons/tokens/bnb.svg?component';
 import IconTokenETH from 'assets/icons/tokens/eth.svg?component';
 import IconTokenBTC from 'assets/icons/tokens/btc.svg?component';
+import { markRaw } from 'vue';
 
 export const useAssetMeta = () => {
-	const assets: AssetsList = [
+	const assetMetaList: AssetMeta[] = [
 		{
 			key: 'BNB',
 			name: 'BNB',
-			icon: IconTokenBNB,
+			icon: markRaw(IconTokenBNB),
 		},
 		{
 			key: 'ETH',
 			name: 'Ether',
-			icon: IconTokenETH,
+			icon: markRaw(IconTokenETH),
 		},
 		{
 			key: 'BTC',
 			name: 'Bitcoin',
-			icon: IconTokenBTC,
+			icon: markRaw(IconTokenBTC),
 		},
 	];
 
-	function getAssetMetaByKey(key: string) {
-		return assets.find((asset) => asset.key === key);
-	}
-
-	function getAssetMetaByName(name: string) {
-		return assets.find((asset) => asset.name === name);
+	function getAssetMetaByKey(key: AssetKey) {
+		return assetMetaList.find((asset) => asset.key === key);
 	}
 
 	return {
+		assetMetaList,
 		getAssetMetaByKey,
-		getAssetMetaByName,
 	};
 };

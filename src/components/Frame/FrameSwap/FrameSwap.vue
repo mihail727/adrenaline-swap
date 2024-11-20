@@ -1,21 +1,19 @@
 <script setup lang="ts">
-import AssetBalance from '@/components/Asset/AssetBalance.vue';
-import AssetButton from '@/components/Asset/AssetButton.vue';
-import { useAssetMeta } from '@/hooks';
-
-const assetMeta = useAssetMeta();
-
-const asset = assetMeta.getAssetMetaByKey('BNB');
+import FrameSwapMain from './FrameSwapMain.vue';
 </script>
 
 <template>
 	<div :class="$style.frameSwap">
-		<AssetButton :asset="asset" />
-		<AssetBalance :balance="14762.5" />
+		<FrameSwapMain />
+		<!-- <FrameSwapMain /> -->
 	</div>
 </template>
 
 <style lang="scss" module>
 .frameSwap {
+	display: flex;
+	gap: 20px;
+	justify-content: flex-end;
+	height: vars.$frameHeight;
 }
 </style>

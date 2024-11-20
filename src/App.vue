@@ -1,14 +1,20 @@
 <script setup lang="ts">
 import AppLayout from '@/containers/AppLayout.vue';
+import { useAppStore } from './stores/useAppStore';
+
+const appStore = useAppStore();
 </script>
 
 <template>
 	<div :class="$style.appContainer">
-		<AppLayout>
+		<AppLayout v-if="appStore.isStartupLogicCompleted">
 			<RouterView v-slot="{ Component, route }">
-				<component :is="Component" :key="route.fullPath" />
+				<Component :is="Component" :key="route.fullPath" />
 			</RouterView>
 		</AppLayout>
+
+		<!-- TODO: add app loader -->
+		<div v-else>...Loading</div>
 	</div>
 </template>
 
@@ -19,7 +25,8 @@ import AppLayout from '@/containers/AppLayout.vue';
 
 	height: 100dvh;
 	width: 100dvw;
-	padding: 20px;
 	overflow: hidden;
+
+	color: white;
 }
 </style>

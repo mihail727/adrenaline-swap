@@ -17,12 +17,15 @@ const selectedFrameEl = computed<Component>(() => frameElements[selectedFrame.va
 
 <template>
 	<div :class="$style.homePage">
-		<ButtonSwitch v-model:selected-state="selectedFrame" />
+		<ButtonSwitch v-model:selected-state="selectedFrame" :class="$style.btnSwitch" />
 
 		<div :class="$style.framesWrapper">
 			<Transition
 				:enter-from-class="$style.transitionFrame"
 				:leave-to-class="$style.transitionFrame"
+				:enter-active-class="$style.transitionFrameActive"
+				:leave-active-class="$style.transitionFrameActive"
+				mode="out-in"
 			>
 				<Component :is="selectedFrameEl" />
 			</Transition>
@@ -34,8 +37,14 @@ const selectedFrameEl = computed<Component>(() => frameElements[selectedFrame.va
 .homePage {
 	display: flex;
 	flex-direction: column;
-	height: 100%;
+	align-items: flex-end;
 	width: 100%;
+}
+
+.btnSwitch {
+	@media screen and (min-width: vars.$minDesktopWidth) {
+		width: vars.$frameWidth;
+	}
 }
 
 .framesWrapper {
@@ -49,9 +58,12 @@ const selectedFrameEl = computed<Component>(() => frameElements[selectedFrame.va
 	}
 }
 
-.transitionFrame {
-	position: absolute;
+.transitionFrameActive {
 	transition: all 0.3s ease;
+}
+
+.transitionFrame {
+	transform: translateX(10%);
 	opacity: 0;
 }
 </style>
