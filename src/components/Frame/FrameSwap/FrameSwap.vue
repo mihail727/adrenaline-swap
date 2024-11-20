@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import FrameTokenSelect from '../FrameTokenSelect.vue';
 import FrameSwapMain from './FrameSwapMain.vue';
 </script>
 
 <template>
 	<div :class="$style.frameSwap">
 		<FrameSwapMain />
-		<!-- <FrameSwapMain /> -->
+		<FrameTokenSelect />
 	</div>
 </template>
 

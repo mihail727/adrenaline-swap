@@ -4,13 +4,13 @@ import VInput from '@/components/VInput.vue';
 
 <template>
 	<div :class="$style.frameSwapOptions">
-		<VInput :max="100">
+		<VInput :max="100" placeholder="0.00">
 			<template #label>Slippage tolerance</template>
 			<template #additional>
 				<span :class="$style.percent">%</span>
 			</template>
 		</VInput>
-		<VInput :max="100">
+		<VInput :max="100" placeholder="0.00">
 			<template #label>Transaction deadline</template>
 			<template #additional>
 				<span :class="$style.percent">min</span>

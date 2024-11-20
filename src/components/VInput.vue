@@ -1,25 +1,34 @@
 <script setup lang="ts">
-const inputValue = defineModel<number | undefined>();
+import { type InputHTMLAttributes } from 'vue';
+
+type InputValue = number | string;
+
+const inputValue = defineModel<InputValue>();
 const inputFocused = defineModel<boolean>('inputFocused', {
 	default: false,
 });
 
-withDefaults(
+const props = withDefaults(
 	defineProps<{
-		value?: number;
+		value?: InputValue;
+		mode?: 'text' | 'number';
+		inputMode?: InputHTMLAttributes['inputmode'];
+		placeholder?: string;
 		max?: number;
 		min?: number;
 		precision?: number;
 	}>(),
 	{
 		value: 0,
+		mode: 'number',
+		inputMode: 'numeric',
 		max: 0,
 		min: 0,
 		precision: 2,
 	},
 );
 
-function onInput(ev: Event) {
+function onInputNumber(ev: Event) {
 	const target = ev.target as HTMLInputElement;
 
 	if ('unmasked' in target) {
@@ -30,6 +39,12 @@ function onInput(ev: Event) {
 
 	inputValue.value = Number(target.value);
 }
+
+function onInputDefault(ev: Event) {
+	const target = ev.target as HTMLInputElement;
+
+	inputValue.value = target.value;
+}
 </script>
 
 <template>
@@ -39,16 +54,28 @@ function onInput(ev: Event) {
 		</div>
 
 		<input
+			v-if="mode === 'number'"
 			v-number="{
-				max: max,
-				min: min,
-				precision: precision,
+				min: props.min,
+				max: props.max,
+				precision: props.precision,
 			}"
 			:value="inputValue"
-			inputmode="numeric"
-			placeholder="0.00"
+			:inputmode="inputMode"
+			:placeholder="placeholder"
 			:class="$style.inputEl"
-			@input="onInput"
+			@input="onInputNumber"
+			@focus="inputFocused = true"
+			@blur="inputFocused = false"
+		/>
+
+		<input
+			v-else
+			:value="inputValue"
+			:inputmode="inputMode"
+			:placeholder="placeholder"
+			:class="$style.inputEl"
+			@input="onInputDefault"
 			@focus="inputFocused = true"
 			@blur="inputFocused = false"
 		/>

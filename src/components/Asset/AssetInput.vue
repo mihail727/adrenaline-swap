@@ -31,6 +31,7 @@ function onClickRemove() {
 		<VInput
 			v-model="inputValue"
 			v-model:input-focused="inputFocused"
+			placeholder="0.00"
 			:min="0"
 			:max="assetBalance"
 		>

@@ -87,7 +87,7 @@ $framSwapMainGap: 14px;
 	transition: transform 0.3s ease-out;
 
 	&:active {
-		transform: scale(0.9);
+		transform: scale(0.8);
 	}
 }
 
