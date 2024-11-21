@@ -2,17 +2,36 @@
 import { useLiquidityStore } from '@/stores';
 import FramePoolAddPair from './FramePoolAddPair.vue';
 import FramePoolLiqudity from './FramePoolLiqudity.vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const liquidityStore = useLiquidityStore();
 
 const isFrameAddPairVisible = ref(false);
 
+const isFramePoolLiqudityUnactive = computed(() => !!isFrameAddPairVisible.value);
+
 function onAddPair(assetOne: Asset, assetTwo: Asset) {
+	if (
+		isLiquidityListAlreadyHas({
+			first: assetOne,
+			second: assetTwo,
+		})
+	)
+		return;
+
 	liquidityStore.liquidityList.push({
 		first: assetOne,
 		second: assetTwo,
 	});
+}
+
+function isLiquidityListAlreadyHas(liquidity: Liquidity) {
+	for (const item of liquidityStore.liquidityList) {
+		if (item.first.key === liquidity.first.key && item.second.key === liquidity.second.key)
+			return true;
+	}
+
+	return false;
 }
 
 function onClickItem(liquidity: Liquidity) {}
@@ -31,6 +50,7 @@ function onClickItem(liquidity: Liquidity) {}
 				key="list"
 				@click-add="isFrameAddPairVisible = true"
 				@click-item="onClickItem"
+				:class="isFramePoolLiqudityUnactive && $style.unactive"
 			/>
 			<FramePoolAddPair
 				v-if="isFrameAddPairVisible"
@@ -64,5 +84,9 @@ function onClickItem(liquidity: Liquidity) {}
 .transition {
 	transform: translateX(60%);
 	opacity: 0;
+}
+
+.unactive {
+	opacity: 0.5;
 }
 </style>
