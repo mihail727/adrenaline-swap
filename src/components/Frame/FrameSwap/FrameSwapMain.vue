@@ -2,6 +2,7 @@
 import AssetBlock from '@/components/Asset/AssetBlock.vue';
 import IconArrowCircle from 'assets/icons/arrow-circle.svg?component';
 import FrameSwapOptions from './FrameSwapOptions.vue';
+import VButton from '@/components/VButton.vue';
 
 const selectedBlock = defineModel<AssetBlockID>('selectedBlock');
 const upperAsset = defineModel<Asset>('upperAsset');
@@ -43,9 +44,9 @@ function onClickReplace() {
 			:class="[$style.frameSwapOptions, selectedBlock !== undefined && $style.hasSelected]"
 		/>
 
-		<button :class="[$style.btnSwap, selectedBlock !== undefined && $style.hasSelected]">
+		<VButton :class="[$style.btnSwap, selectedBlock !== undefined && $style.hasSelected]">
 			Swap
-		</button>
+		</VButton>
 	</div>
 </template>
 
@@ -96,17 +97,6 @@ function onClickReplace() {
 }
 
 .btnSwap {
-	width: 100%;
-	font-size: 24px;
-	padding: 18px;
-	background-color: colors.$red;
-	color: colors.$white;
-	border-radius: 10px;
 	margin-top: auto;
-	transition: all 0.3s ease-out;
-
-	&:active {
-		transform: scale(0.9);
-	}
 }
 </style>

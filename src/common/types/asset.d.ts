@@ -11,6 +11,9 @@ declare global {
 
 	interface Asset extends AssetMeta {
 		balance: number;
+		incomeValue: number;
+		lockedInPoolValue: number;
+		totalAssets: number;
 	}
 
 	type AssetBlockID = 0 | 1;

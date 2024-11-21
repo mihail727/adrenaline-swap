@@ -2,10 +2,13 @@
 import { ref } from 'vue';
 import FrameTokenSelect from '../FrameTokenSelect.vue';
 import FrameSwapMain from './FrameSwapMain.vue';
+import { useAssetStore } from '@/stores';
+
+const assetStore = useAssetStore();
 
 const selectedBlock = ref<AssetBlockID | undefined>();
-const upperAsset = ref<Asset | undefined>();
-const bottomAsset = ref<Asset | undefined>();
+const upperAsset = ref<Asset | undefined>(assetStore.assetList[0]);
+const bottomAsset = ref<Asset | undefined>(assetStore.assetList[1]);
 
 function onSelectAsset(asset: Asset) {
 	if (selectedBlock.value === 0) upperAsset.value = asset;

@@ -3,6 +3,7 @@ import type {
 	RouteLocationNormalized,
 	NavigationGuardNext,
 } from 'vue-router';
+import type { Component } from 'vue';
 
 declare global {
 	type MidlewareLaunchContext = [
@@ -18,4 +19,12 @@ declare global {
 	};
 
 	type Middleware = (context: MiddlewareContext) => void | Promise<void>;
+}
+
+declare module 'vue-router' {
+	interface RouteMeta {
+		layoutName?: string;
+		layoutComponent?: Component;
+		middleware?: Middleware | Middleware[];
+	}
 }
