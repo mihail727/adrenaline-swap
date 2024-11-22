@@ -39,15 +39,9 @@ defineEmits<{
 
 <style lang="scss" module>
 .framePoolLiquidity {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	flex-shrink: 0;
-	gap: 8px;
+	@extend %frameItem;
 
-	@media screen and (min-width: vars.$minDesktopWidth) {
-		width: vars.$frameWidth;
-	}
+	gap: 8px;
 }
 
 .btnAdd {
@@ -88,6 +82,7 @@ defineEmits<{
 }
 
 .transition {
+	transform: translateX(20%);
 	opacity: 0;
 }
 </style>

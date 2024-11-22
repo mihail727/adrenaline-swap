@@ -18,7 +18,7 @@ export default defineConfig(() => {
 				scss: {
 					additionalData: `
 						@use "@/assets/scss/vite/colors";
-						@use "@/assets/scss/vite/fonts";
+						@use "@/assets/scss/vite/class";
 						@use "@/assets/scss/vite/vars";
 					`,
 				},

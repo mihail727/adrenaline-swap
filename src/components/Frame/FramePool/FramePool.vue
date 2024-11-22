@@ -1,89 +1,102 @@
 <script setup lang="ts">
-import { useLiquidityStore } from '@/stores';
-import FramePoolAddPair from './FramePoolAddPair.vue';
+import { useAssetStore, useLiquidityStore } from '@/stores';
 import FramePoolLiqudity from './FramePoolLiqudity.vue';
+import FrameTokenSelect from '../FrameTokenSelect.vue';
+import FramePoolAddPair from './FramePoolAddPair.vue';
 import { computed, ref } from 'vue';
+import TransitionFrames from '@/containers/Transition/TransitionFrames.vue';
+import { promiseTimeout } from '@vueuse/core';
+import FramePoolWithdraw from './FramePoolWithdraw.vue';
 
 const liquidityStore = useLiquidityStore();
+const assetStore = useAssetStore();
 
+const selectedBlock = ref<AssetBlockID | undefined>();
+const selectedPair = ref<Liquidity | undefined>();
+const upperAsset = ref<Asset | undefined>(assetStore.assetList[0]);
+const bottomAsset = ref<Asset | undefined>(assetStore.assetList[1]);
 const isFrameAddPairVisible = ref(false);
 
-const isFramePoolLiqudityUnactive = computed(() => !!isFrameAddPairVisible.value);
+const isFrameTokenSelectVisible = computed(
+	() => isFrameAddPairVisible.value && selectedBlock.value !== undefined,
+);
+const isFramePoolLiqudityUnactive = computed(
+	() => isFrameAddPairVisible.value || isFrameWithdrawVisible.value,
+);
+const isFrameWithdrawVisible = computed(() => selectedPair.value !== undefined);
 
-function onAddPair(assetOne: Asset, assetTwo: Asset) {
-	if (
-		isLiquidityListAlreadyHas({
-			first: assetOne,
-			second: assetTwo,
-		})
-	)
-		return;
+async function onAddPair(upperAsset: Asset, bottomAsset: Asset) {
+	const liquidity: Liquidity = {
+		first: upperAsset,
+		second: bottomAsset,
+	};
 
-	liquidityStore.liquidityList.push({
-		first: assetOne,
-		second: assetTwo,
-	});
+	await promiseTimeout(400);
+
+	liquidityStore.liquidityList.splice(0, 0, liquidity);
 }
 
-function isLiquidityListAlreadyHas(liquidity: Liquidity) {
-	for (const item of liquidityStore.liquidityList) {
-		if (item.first.key === liquidity.first.key && item.second.key === liquidity.second.key)
-			return true;
-	}
+function onSelectAsset(asset: Asset) {
+	if (selectedBlock.value === 0) upperAsset.value = asset;
+	if (selectedBlock.value === 1) bottomAsset.value = asset;
 
-	return false;
+	onCloseTokenSelect();
 }
 
-function onClickItem(liquidity: Liquidity) {}
+function onClickItem(liquidity: Liquidity) {
+	selectedPair.value = liquidity;
+}
+
+function onCloseAddPair() {
+	if (!isFrameTokenSelectVisible.value) isFrameAddPairVisible.value = false;
+}
+
+function onCloseTokenSelect() {
+	selectedBlock.value = undefined;
+}
 </script>
 
 <template>
 	<div :class="$style.framePool">
-		<TransitionGroup
-			:enter-active-class="$style.transitionActive"
-			:leave-active-class="$style.transitionActiveLeave"
-			:move-class="$style.transitionActive"
-			:enter-from-class="$style.transition"
-			:leave-to-class="$style.transition"
-		>
+		<TransitionFrames>
 			<FramePoolLiqudity
 				key="list"
+				:class="isFramePoolLiqudityUnactive && $style.unactive"
 				@click-add="isFrameAddPairVisible = true"
 				@click-item="onClickItem"
-				:class="isFramePoolLiqudityUnactive && $style.unactive"
 			/>
+
 			<FramePoolAddPair
 				v-if="isFrameAddPairVisible"
 				key="addPair"
+				v-model:selected-block="selectedBlock"
+				v-model:upper-asset="upperAsset"
+				v-model:bottom-asset="bottomAsset"
 				@add="onAddPair"
-				@close="isFrameAddPairVisible = false"
+				@close="onCloseAddPair"
 			/>
-		</TransitionGroup>
+
+			<FrameTokenSelect
+				v-if="isFrameTokenSelectVisible"
+				key="tokenSelect"
+				@select-asset="onSelectAsset"
+				@close="onCloseTokenSelect"
+			/>
+
+			<FramePoolWithdraw
+				v-if="selectedPair !== undefined"
+				:pair="selectedPair"
+				@close="selectedPair = undefined"
+			/>
+		</TransitionFrames>
 	</div>
 </template>
 
 <style lang="scss" module>
 .framePool {
-	position: relative;
-	display: flex;
+	@extend %frame;
+
 	gap: 20px;
-	justify-content: flex-end;
-	height: vars.$frameHeight;
-}
-
-.transitionActive {
-	transition: all 0.6s ease;
-}
-
-.transitionActiveLeave {
-	position: absolute;
-	transition: all 0.6s ease;
-	z-index: -1;
-}
-
-.transition {
-	transform: translateX(60%);
-	opacity: 0;
 }
 
 .unactive {

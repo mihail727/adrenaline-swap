@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import FrameTokenSelect from '../FrameTokenSelect.vue';
 import FrameSwapMain from './FrameSwapMain.vue';
 import { useAssetStore } from '@/stores';
+import TransitionFrames from '@/containers/Transition/TransitionFrames.vue';
 
 const assetStore = useAssetStore();
 
@@ -22,13 +23,7 @@ function onCloseTokenSelect() {
 
 <template>
 	<div :class="$style.frameSwap">
-		<TransitionGroup
-			:enter-active-class="$style.transitionActive"
-			:leave-active-class="$style.transitionActiveLeave"
-			:move-class="$style.transitionActive"
-			:enter-from-class="$style.transition"
-			:leave-to-class="$style.transition"
-		>
+		<TransitionFrames>
 			<FrameSwapMain
 				key="main"
 				v-model:selected-block="selectedBlock"
@@ -41,17 +36,15 @@ function onCloseTokenSelect() {
 				@select-asset="onSelectAsset"
 				@close="onCloseTokenSelect"
 			/>
-		</TransitionGroup>
+		</TransitionFrames>
 	</div>
 </template>
 
 <style lang="scss" module>
 .frameSwap {
-	position: relative;
-	display: flex;
+	@extend %frame;
+
 	gap: 20px;
-	justify-content: flex-end;
-	height: vars.$frameHeight;
 }
 
 .transitionActive {

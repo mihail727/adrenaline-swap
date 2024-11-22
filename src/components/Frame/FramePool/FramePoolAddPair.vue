@@ -2,20 +2,16 @@
 import AssetBlock from '@/components/Asset/AssetBlock.vue';
 import FrameHeader from '../FrameHeader.vue';
 import VButton from '@/components/VButton.vue';
-import { ref } from 'vue';
-import { useAssetStore } from '@/stores';
 import { vOnClickOutside } from '@vueuse/components';
 
-const assetStore = useAssetStore();
+const selectedBlock = defineModel<AssetBlockID | undefined>('selectedBlock');
+const upperAsset = defineModel<Asset | undefined>('upperAsset');
+const bottomAsset = defineModel<Asset | undefined>('bottomAsset');
 
 const emit = defineEmits<{
 	add: [assetOne: Asset, assetTwo: Asset];
 	close: [];
 }>();
-
-const selectedBlock = ref<AssetBlockID | undefined>();
-const upperAsset = ref<Asset | undefined>(assetStore.assetList[0]);
-const bottomAsset = ref<Asset | undefined>(assetStore.assetList[1]);
 
 function onClickAdd() {
 	if (!upperAsset.value || !bottomAsset.value) return;
@@ -63,19 +59,12 @@ function onClickOutside() {
 
 <style lang="scss" module>
 .framePoolAddPair {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	height: 100%;
-	flex-shrink: 0;
+	@extend %frameItem;
+
 	background-color: colors.$darkSecond;
 	border-radius: 10px;
 	padding: 12px 20px 20px 20px;
 	gap: 28px;
-
-	@media screen and (min-width: vars.$minDesktopWidth) {
-		width: vars.$frameWidth;
-	}
 }
 
 .blockWrapper {

@@ -56,15 +56,9 @@ function onClickReplace() {
 }
 
 .frameSwapMain {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	flex-shrink: 0;
-	gap: 14px;
+	@extend %frameItem;
 
-	@media screen and (min-width: vars.$minDesktopWidth) {
-		width: vars.$frameWidth;
-	}
+	gap: 14px;
 
 	& > * {
 		transition: all 0.3s ease;
