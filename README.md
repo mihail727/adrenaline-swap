@@ -1,5 +1,10 @@
-# Vue 3 + TypeScript + Vite
+# Adrenaline Swap
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Demo project written in **Vue 3** (Composition API, Pinia) and **Typescript**.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+- **No server-side logic**, so you can click on all the buttons;
+- The initial boot simulates the operation of startup functions to show the operation of the application loading screen in more detail:
+  - Load delay in range: **0 - 10 seconds**;
+- **Adaptive design**: Mobile (**375px**) - Desktop (**1920px**);
+
+**Playground Link**: https://adrenaline-swap.netlify.app/
