@@ -1,20 +1,23 @@
 <script setup lang="ts">
 import AppLayout from '@/containers/AppLayout.vue';
-import { useAppStore } from './stores/useAppStore';
+import AppLoader from '@/containers/AppLoader.vue';
+import { useAppStore } from './stores';
+import TransitionApp from '@/containers/Transition/TransitionApp.vue';
 
 const appStore = useAppStore();
 </script>
 
 <template>
 	<div :class="$style.appContainer">
-		<AppLayout v-if="appStore.isStartupLogicCompleted">
-			<RouterView v-slot="{ Component, route }">
-				<Component :is="Component" :key="route.fullPath" />
-			</RouterView>
-		</AppLayout>
+		<AppLoader />
 
-		<!-- TODO: add app loader -->
-		<div v-else>...Loading</div>
+		<TransitionApp>
+			<AppLayout v-if="appStore.isAppFullLoaded">
+				<RouterView v-slot="{ Component, route }">
+					<Component :is="Component" :key="route.fullPath" />
+				</RouterView>
+			</AppLayout>
+		</TransitionApp>
 	</div>
 </template>
 

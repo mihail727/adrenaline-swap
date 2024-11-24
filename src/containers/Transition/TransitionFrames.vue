@@ -24,7 +24,7 @@
 }
 
 .transition {
-	transform: translateX(60%);
+	transform: translateX(100%);
 	opacity: 0;
 }
 </style>

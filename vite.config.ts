@@ -20,6 +20,7 @@ export default defineConfig(() => {
 						@use "@/assets/scss/vite/colors";
 						@use "@/assets/scss/vite/class";
 						@use "@/assets/scss/vite/vars";
+						@use "@/assets/scss/vite/zindex";
 					`,
 				},
 			},

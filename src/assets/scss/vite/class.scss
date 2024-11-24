@@ -26,3 +26,32 @@
 		width: vars.$frameWidth;
 	}
 }
+
+%animteHeartBit {
+	animation: animate-heart-bit 1.5s infinite;
+
+	@keyframes animate-heart-bit {
+		10% {
+			transform: scale(0.96);
+		}
+		20% {
+			transform: scale(1);
+		}
+		25% {
+			transform: scale(0.98);
+		}
+		60% {
+			transform: scale(1);
+		}
+	}
+}
+
+%animateSpin {
+	animation: animate-spin 60s linear infinite;
+
+	@keyframes animate-spin {
+		100% {
+			transform: rotate(1turn);
+		}
+	}
+}

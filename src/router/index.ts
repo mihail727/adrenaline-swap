@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 import { launchMiddlewareSystem } from './middleware-system';
+import { useAppStore } from '@/stores/useAppStore';
 
 const routes: RouteRecordRaw[] = [
 	{
@@ -28,5 +29,11 @@ const router = createRouter({
 });
 
 router.beforeEach(launchMiddlewareSystem);
+
+router.afterEach(() => {
+	const appStore = useAppStore();
+
+	if (!appStore.isAppReadyToRender) appStore.isAppReadyToRender = true;
+});
 
 export default router;

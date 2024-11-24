@@ -63,7 +63,6 @@ const selectedFrameEl = computed<Component>(() => frameElements[selectedFrame.va
 }
 
 .transitionFrame {
-	transform: translateX(10%);
 	opacity: 0;
 }
 </style>

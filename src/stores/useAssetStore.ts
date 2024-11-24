@@ -12,7 +12,7 @@ export const useAssetStore = defineStore('asset-store', () => {
 	async function updateAssetList() {
 		const response = assetMockDatList as Asset[];
 
-		// await promiseTimeout(1000);
+		await promiseTimeout(6000);
 
 		assetList.value = response.map((item) => ({
 			...item,

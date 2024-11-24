@@ -99,7 +99,6 @@ function onInputDefault(ev: Event) {
 	display: flex;
 	gap: 3px;
 	font-size: 12px;
-	background-color: colors.$main;
 }
 
 .inputEl {
