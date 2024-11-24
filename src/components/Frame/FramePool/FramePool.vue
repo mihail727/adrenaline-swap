@@ -54,6 +54,21 @@ function onCloseAddPair() {
 function onCloseTokenSelect() {
 	selectedBlock.value = undefined;
 }
+
+async function onWithdraw(pair: Liquidity) {
+	onCloseWithdraw();
+
+	const index = liquidityStore.liquidityList.findIndex(
+		(v) => v.first === pair.first && v.second === pair.second,
+	);
+
+	await promiseTimeout(400);
+	liquidityStore.liquidityList.splice(index, 1);
+}
+
+function onCloseWithdraw() {
+	selectedPair.value = undefined;
+}
 </script>
 
 <template>
@@ -86,7 +101,8 @@ function onCloseTokenSelect() {
 			<FramePoolWithdraw
 				v-if="selectedPair !== undefined"
 				:pair="selectedPair"
-				@close="selectedPair = undefined"
+				@click-withdraw="onWithdraw"
+				@close="onCloseWithdraw"
 			/>
 		</TransitionFrames>
 	</div>

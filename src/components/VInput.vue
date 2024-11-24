@@ -32,7 +32,11 @@ function onInputNumber(ev: Event) {
 	const target = ev.target as HTMLInputElement;
 
 	if ('unmasked' in target) {
-		inputValue.value = Number(target.unmasked);
+		if (!target.unmasked) {
+			inputValue.value = '';
+		} else {
+			inputValue.value = Number(target.unmasked);
+		}
 
 		return;
 	}
