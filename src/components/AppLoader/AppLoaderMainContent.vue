@@ -2,8 +2,7 @@
 import IconBigHeart from '@/assets/icons/big-heart.svg?component';
 import IconRays from '@/assets/icons/rays.svg?component';
 import { useAppStore } from '@/stores';
-import { promiseTimeout } from '@vueuse/core';
-import { nextTick, ref, useCssModule, watch } from 'vue';
+import { ref, useCssModule, watch } from 'vue';
 
 const appStore = useAppStore();
 const cssModule = useCssModule();
@@ -16,13 +15,8 @@ const unWatch = watch(
 	async (loaded: boolean) => {
 		if (!loaded || !heartWrapperEl.value || !iconRaysEl.value) return;
 
-		await nextTick();
-
 		heartWrapperEl.value.classList.add(cssModule.animationLoadedHeartWrapper);
 		iconRaysEl.value.classList.add(cssModule.animationLoadedIconRays);
-
-		await promiseTimeout(4000);
-		iconRaysEl.value.classList.remove(cssModule.animateSpin);
 
 		unWatch();
 	},
@@ -44,9 +38,8 @@ const unWatch = watch(
 			appear
 			:appear-active-class="$style.transitionActiveItems"
 			:appear-from-class="$style.transitionEnterItems"
-			@after-appear="(el) => el.classList.add($style.animateSpin)"
 		>
-			<div ref="iconRaysEl" :class="$style.raysWrapper">
+			<div ref="iconRaysEl" :class="[$style.raysWrapper, $style.animateSpin]">
 				<IconRays :class="$style.iconRays" />
 			</div>
 		</Transition>
@@ -109,7 +102,7 @@ const unWatch = watch(
 	height: auto;
 	z-index: -1;
 
-	&.animateSpin {
+	&.animateSpin > * {
 		@extend %animateSpin;
 	}
 

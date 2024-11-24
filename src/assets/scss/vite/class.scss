@@ -47,7 +47,7 @@
 }
 
 %animateSpin {
-	animation: animate-spin 60s linear infinite;
+	animation: animate-spin 60s linear infinite forwards;
 
 	@keyframes animate-spin {
 		100% {
