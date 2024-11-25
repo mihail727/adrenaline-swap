@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import svgLoader from 'vite-svg-loader';
 import viteCompression from 'vite-plugin-compression';
 import path from 'path';
+import autoprefixer from 'autoprefixer';
 
 export default defineConfig(() => {
 	return {
@@ -14,8 +15,16 @@ export default defineConfig(() => {
 		},
 
 		css: {
+			postcss: {
+				plugins: [
+					autoprefixer({
+						grid: 'autoplace',
+					}),
+				],
+			},
 			preprocessorOptions: {
 				scss: {
+					api: 'modern-compiler',
 					additionalData: `
 						@use "@/assets/scss/vite/colors";
 						@use "@/assets/scss/vite/class";
