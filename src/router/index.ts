@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
-import { launchMiddlewareSystem } from './middleware-system';
 import { useAppStore } from '@/stores/useAppStore';
+import { layoutsMiddleware, startupMiddleware } from './middlewares';
 
 const routes: RouteRecordRaw[] = [
 	{
@@ -26,9 +26,8 @@ const router = createRouter({
 			behavior: 'smooth',
 		};
 	},
+	globalMiddleware: [startupMiddleware, layoutsMiddleware],
 });
-
-router.beforeEach(launchMiddlewareSystem);
 
 router.afterEach(() => {
 	const appStore = useAppStore();
