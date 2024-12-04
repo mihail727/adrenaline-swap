@@ -4,17 +4,21 @@ import AvatarImage from '@/assets/icons/avatar.svg';
 </script>
 
 <template>
-	<div :class="$style.panelTop">
-		<div :class="$style.panelItem">
-			<TronLogo :class="$style.tronLogo" />
+	<header :class="$style.panelTop">
+		<section :class="$style.panelItem">
+			<figure :class="$style.tronLogo">
+				<TronLogo aria-hidden="true" />
+			</figure>
 			<span>Tron Network</span>
-		</div>
+		</section>
 
-		<div :class="$style.panelItem">
+		<section :class="$style.panelItem">
 			<span>TTEWew..y678</span>
-			<AvatarImage :class="$style.avatarImage" />
-		</div>
-	</div>
+			<figure :class="$style.avatarImage">
+				<AvatarImage aria-hidden="true" />
+			</figure>
+		</section>
+	</header>
 </template>
 
 <style lang="scss" module>
@@ -38,11 +42,17 @@ import AvatarImage from '@/assets/icons/avatar.svg';
 }
 
 .tronLogo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 32px;
 	height: auto;
 }
 
 .avatarImage {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 26px;
 	height: auto;
 }

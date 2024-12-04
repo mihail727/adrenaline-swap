@@ -11,12 +11,12 @@ import AppLoaderTopText from '@/components/AppLoader/AppLoaderTopText.vue';
 		:appear-active-class="$style.transitionActiveWrapper"
 		:appear-from-class="$style.transitionEnterFromWrapper"
 	>
-		<div :class="$style.appLoader">
+		<aside :class="$style.appLoader">
 			<AppLoaderTopText />
 			<AppLoaderMainContent />
 			<AppLoaderName />
 			<AppLoaderBottomText />
-		</div>
+		</aside>
 	</Transition>
 </template>
 
@@ -29,8 +29,6 @@ import AppLoaderTopText from '@/components/AppLoader/AppLoaderTopText.vue';
 	height: 100dvh;
 	width: 100dvw;
 	overflow: hidden;
-
-	z-index: zindex.$zindexAppLoader;
 }
 
 .transitionActiveWrapper {

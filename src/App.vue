@@ -9,10 +9,10 @@ const appStore = useAppStore();
 
 <template>
 	<div :class="$style.appContainer">
-		<AppLoader />
+		<AppLoader :class="$style.appLoader" />
 
 		<TransitionApp>
-			<AppLayout v-if="appStore.isAppFullLoaded">
+			<AppLayout v-if="appStore.isAppFullLoaded" :class="$style.app">
 				<RouterView v-slot="{ Component, route }">
 					<Component :is="Component" :key="route.fullPath" />
 				</RouterView>
@@ -31,5 +31,14 @@ const appStore = useAppStore();
 	overflow: hidden;
 
 	color: white;
+}
+
+.app {
+	z-index: zindex.$zindexApp;
+	position: relative;
+}
+
+.appLoader {
+	z-index: zindex.$zindexAppLoader;
 }
 </style>

@@ -3,10 +3,12 @@ import HeartIcon from '@/assets/icons/heart.svg';
 </script>
 
 <template>
-	<div :class="$style.panelBottom">
+	<footer :class="$style.panelBottom">
 		<span :class="$style.text">Made with</span>
-		<HeartIcon :class="$style.heartIcon" />
-	</div>
+		<figure :class="$style.heartIcon">
+			<HeartIcon aria-hidden="true" />
+		</figure>
+	</footer>
 </template>
 
 <style lang="scss" module>
@@ -27,6 +29,9 @@ import HeartIcon from '@/assets/icons/heart.svg';
 }
 
 .heartIcon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 22px;
 	height: auto;
 }
