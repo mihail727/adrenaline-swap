@@ -8,19 +8,26 @@ defineProps<{
 </script>
 
 <template>
-	<div :class="$style.framePoolLiqudityListItem">
-		<div :class="$style.iconsWrapper">
-			<Component :is="liquidity.first.icon" :class="$style.icon" />
-			<Component :is="liquidity.second.icon" :class="$style.icon" />
-		</div>
+	<li :class="$style.framePoolLiqudityListItem">
+		<section :class="$style.iconsWrapper">
+			<figure :class="$style.icon">
+				<Component :is="liquidity.first.icon" aria-hidden="true" />
+			</figure>
 
-		<div :class="$style.infoWrapper">
+			<figure :class="$style.icon">
+				<Component :is="liquidity.second.icon" aria-hidden="true" />
+			</figure>
+		</section>
+
+		<section :class="$style.infoWrapper">
 			<FramePoolLiqudityListItemInfo :asset="liquidity.first" />
 			<FramePoolLiqudityListItemInfo :asset="liquidity.second" />
-		</div>
+		</section>
 
-		<IconArrow :class="$style.iconArrow" />
-	</div>
+		<figure :class="$style.iconArrow">
+			<IconArrow aria-hidden="true" />
+		</figure>
+	</li>
 </template>
 
 <style lang="scss" module>
@@ -44,8 +51,14 @@ defineProps<{
 }
 
 .icon {
-	width: 24px;
-	height: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	svg {
+		width: 24px;
+		height: 24px;
+	}
 }
 
 .infoWrapper {
@@ -54,7 +67,13 @@ defineProps<{
 }
 
 .iconArrow {
-	height: 16px;
-	width: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	svg {
+		height: 16px;
+		width: auto;
+	}
 }
 </style>

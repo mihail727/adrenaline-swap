@@ -38,8 +38,8 @@ function onClickOutside() {
 </script>
 
 <template>
-	<div v-on-click-outside="onClickOutside" :class="$style.frameTokenSelect">
-		<div :class="$style.upperContent">
+	<article v-on-click-outside="onClickOutside" :class="$style.frameTokenSelect">
+		<section :class="$style.upperContent">
 			<FrameHeader title="Select a token" @click-back="$emit('close')" />
 
 			<VInput
@@ -50,10 +50,10 @@ function onClickOutside() {
 			>
 				<template #label>Search token name or ticker</template>
 			</VInput>
-		</div>
+		</section>
 
 		<FrameTokenSelectList :assets="filterdAssetList" @select-asset="onSelectAsset" />
-	</div>
+	</article>
 </template>
 
 <style lang="scss" module>

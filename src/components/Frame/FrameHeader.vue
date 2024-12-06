@@ -11,13 +11,15 @@ const emit = defineEmits<{
 </script>
 
 <template>
-	<div :class="$style.frameHeader">
+	<header :class="$style.frameHeader">
 		<button :class="$style.btnBack" @click="emit('clickBack')">
-			<IconArrowCircle :class="$style.iconArrowCircle" />
+			<figure :class="$style.iconArrowCircle">
+				<IconArrowCircle aria-hidden="true" />
+			</figure>
 		</button>
 
-		<span>{{ title }}</span>
-	</div>
+		<p>{{ title }}</p>
+	</header>
 </template>
 
 <style lang="scss" module>
@@ -43,9 +45,15 @@ const emit = defineEmits<{
 }
 
 .iconArrowCircle {
-	height: 24px;
-	width: auto;
-	rotate: 90deg;
-	stroke: colors.$white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	svg {
+		height: 24px;
+		width: auto;
+		rotate: 90deg;
+		stroke: colors.$white;
+	}
 }
 </style>

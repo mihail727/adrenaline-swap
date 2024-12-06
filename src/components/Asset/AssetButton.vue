@@ -37,12 +37,17 @@ function onClick() {
 			mode="out-in"
 		>
 			<div :key="computedAsset.key" :class="$style.asset">
-				<Component :is="computedAsset.icon" :class="$style.iconAsset" />
+				<figure :class="$style.iconAsset">
+					<Component :is="computedAsset.icon" aria-hidden="true" />
+				</figure>
+
 				<span :class="$style.assetKey">{{ computedAsset.key }}</span>
 			</div>
 		</Transition>
 
-		<IconArrow :class="$style.iconArrow" />
+		<figure :class="$style.iconArrow">
+			<IconArrow aria-hidden="true" />
+		</figure>
 	</button>
 </template>
 
@@ -66,6 +71,9 @@ function onClick() {
 }
 
 .iconAsset {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 24px;
 	height: auto;
 }
@@ -75,6 +83,9 @@ function onClick() {
 }
 
 .iconArrow {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 10px;
 	height: auto;
 	margin-left: auto;

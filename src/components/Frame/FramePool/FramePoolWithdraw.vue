@@ -18,18 +18,18 @@ const computedTitle = computed(() => `${props.pair.first.key} / ${props.pair.sec
 </script>
 
 <template>
-	<div v-on-click-outside="() => $emit('close')" :class="$style.framePoolWithdraw">
+	<article v-on-click-outside="() => $emit('close')" :class="$style.framePoolWithdraw">
 		<FrameHeader :title="computedTitle" @click-back="$emit('close')" />
 
-		<div :class="$style.assetsWrapper">
+		<section :class="$style.assetsWrapper">
 			<FramePoolWithdrawAsset :asset="pair.first" />
 			<FramePoolWithdrawAsset :asset="pair.second" />
-		</div>
+		</section>
 
 		<VButton :class="$style.btnWithdraw" @click="$emit('clickWithdraw', pair)">
 			Withdraw
 		</VButton>
-	</div>
+	</article>
 </template>
 
 <style lang="scss" module>

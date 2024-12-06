@@ -18,10 +18,10 @@ const formattedValue = computed(() => {
 </script>
 
 <template>
-	<div :class="$style.framePoolLiqudityListItemInfo">
-		<span :class="$style.key">{{ asset.key }}</span>
-		<span :class="$style.value">{{ formattedValue }}</span>
-	</div>
+	<article :class="$style.framePoolLiqudityListItemInfo">
+		<header :class="$style.key">{{ asset.key }}</header>
+		<p :class="$style.value">{{ formattedValue }}</p>
+	</article>
 </template>
 
 <style lang="scss" module>

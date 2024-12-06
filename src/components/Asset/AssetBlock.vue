@@ -25,14 +25,14 @@ function onClick(asset?: AssetMeta) {
 </script>
 
 <template>
-	<div :class="[$style.assetBlock, selected && $style.selected]">
-		<div :class="$style.infoWrapper">
+	<article :class="[$style.assetBlock, selected && $style.selected]">
+		<section :class="$style.infoWrapper">
 			<AssetButton :asset="asset" @click="onClick" />
 			<AssetBalance :asset-key="asset?.key" :assetBalance="asset?.balance" />
-		</div>
+		</section>
 
 		<AssetInput v-model="inputValue" :asset-key="asset?.key" :asset-balance="asset?.balance" />
-	</div>
+	</article>
 </template>
 
 <style lang="scss" module>

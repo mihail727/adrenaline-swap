@@ -11,7 +11,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-	<div :class="$style.frameTokenSelectList">
+	<ul :class="$style.frameTokenSelectList">
 		<TransitionGroup
 			:enter-active-class="$style.transitionActive"
 			:leave-active-class="$style.transitionLeave"
@@ -26,7 +26,7 @@ const emit = defineEmits<{
 				@click="emit('selectAsset', asset)"
 			/>
 		</TransitionGroup>
-	</div>
+	</ul>
 </template>
 
 <style lang="scss" module>
@@ -35,6 +35,7 @@ const emit = defineEmits<{
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+	height: 100%;
 	overflow: auto;
 }
 

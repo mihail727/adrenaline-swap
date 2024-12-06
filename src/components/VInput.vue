@@ -52,10 +52,10 @@ function onInputDefault(ev: Event) {
 </script>
 
 <template>
-	<div :class="$style.input">
-		<div :class="$style.label">
+	<article :class="$style.input">
+		<header :class="$style.label">
 			<slot name="label" />
-		</div>
+		</header>
 
 		<input
 			v-if="mode === 'number'"
@@ -84,10 +84,10 @@ function onInputDefault(ev: Event) {
 			@blur="inputFocused = false"
 		/>
 
-		<div :class="$style.additionalWrapper">
+		<section :class="$style.additionalWrapper">
 			<slot name="additional" />
-		</div>
-	</div>
+		</section>
+	</article>
 </template>
 
 <style lang="scss" module>

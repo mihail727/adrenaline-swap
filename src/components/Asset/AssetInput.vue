@@ -28,7 +28,7 @@ function onClickRemove() {
 </script>
 
 <template>
-	<div :class="$style.assetInput">
+	<article :class="$style.assetInput">
 		<VInput
 			v-model="inputValue"
 			v-model:input-focused="inputFocused"
@@ -57,17 +57,19 @@ function onClickRemove() {
 					:enter-from-class="$style.transitionAdditional"
 					:leave-to-class="$style.transitionAdditional"
 				>
-					<div v-if="inputFocused" :class="$style.additionalWrapper">
+					<section v-if="inputFocused" :class="$style.additionalWrapper">
 						<button :class="$style.btnMax" @click="onClickMax">Max</button>
 
 						<button :class="$style.btnRemove" @click="onClickRemove">
-							<IconX :class="$style.iconRemove" />
+							<figure :class="$style.iconRemove">
+								<IconX aria-hidden="true" />
+							</figure>
 						</button>
-					</div>
+					</section>
 				</Transition>
 			</template>
 		</VInput>
-	</div>
+	</article>
 </template>
 
 <style lang="scss" module>
@@ -101,8 +103,14 @@ function onClickRemove() {
 }
 
 .iconRemove {
-	height: 15px;
-	width: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	svg {
+		height: 15px;
+		width: auto;
+	}
 }
 
 .transitionAdditional {

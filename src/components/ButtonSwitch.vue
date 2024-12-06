@@ -17,7 +17,7 @@ function onClickBtn(ev: MouseEvent) {
 </script>
 
 <template>
-	<div :class="$style.buttonSwitch">
+	<article :class="$style.buttonSwitch">
 		<span :class="[$style.switcher, $style[`${SwitchButtonState[selectedState]}`]]" />
 
 		<button
@@ -34,7 +34,7 @@ function onClickBtn(ev: MouseEvent) {
 		>
 			Pool
 		</button>
-	</div>
+	</article>
 </template>
 
 <style lang="scss" module>

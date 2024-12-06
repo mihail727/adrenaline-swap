@@ -10,19 +10,21 @@ const formattedBalance = computed(() => formatNumberWithCommas(props.asset.balan
 </script>
 
 <template>
-	<div :class="$style.itemWrapper">
-		<Component :is="asset.icon" :class="$style.assetIcon" />
+	<li :class="$style.itemWrapper">
+		<figure :class="$style.assetIcon">
+			<Component :is="asset.icon" aria-hidden="true" />
+		</figure>
 
-		<div :class="$style.itemLabelWrapper">
-			<span :class="$style.mainItemInfo">{{ asset.key }}</span>
-			<span :class="$style.additionalItemInfo">{{ asset.name }}</span>
-		</div>
+		<section :class="$style.itemLabelWrapper">
+			<header :class="$style.mainItemInfo">{{ asset.key }}</header>
+			<p :class="$style.additionalItemInfo">{{ asset.name }}</p>
+		</section>
 
-		<div :class="$style.itemBalanceWrapper">
-			<span :class="$style.mainItemInfo">{{ formattedBalance }}</span>
-			<span :class="$style.additionalItemInfo">In pool</span>
-		</div>
-	</div>
+		<section :class="$style.itemBalanceWrapper">
+			<p :class="$style.mainItemInfo">{{ formattedBalance }}</p>
+			<p :class="$style.additionalItemInfo">In pool</p>
+		</section>
+	</li>
 </template>
 
 <style lang="scss" module>
@@ -40,8 +42,14 @@ const formattedBalance = computed(() => formatNumberWithCommas(props.asset.balan
 }
 
 .assetIcon {
-	height: 24px;
-	width: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	svg {
+		height: 24px;
+		width: auto;
+	}
 }
 
 .itemLabelWrapper {

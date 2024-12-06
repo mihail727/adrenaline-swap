@@ -12,29 +12,31 @@ const formattedTotal = computed(() => formatNumberWithCommas(props.asset.totalAs
 </script>
 
 <template>
-	<div :class="$style.framePoolWithdrawAsset">
-		<div :class="$style.header">
-			<Component :is="asset.icon" :class="$style.icon" />
-			<span>{{ asset.key }}</span>
-		</div>
+	<article :class="$style.framePoolWithdrawAsset">
+		<header :class="$style.header">
+			<figure :class="$style.icon">
+				<Component :is="asset.icon" />
+			</figure>
+			<p>{{ asset.key }}</p>
+		</header>
 
-		<div :class="$style.valuesWrapper">
-			<div :class="$style.cell">
-				<span :class="$style.label">Locked in Pool</span>
-				<span :class="$style.value">{{ formattedLocked }}</span>
-			</div>
+		<section :class="$style.valuesWrapper">
+			<article :class="$style.cell">
+				<header :class="$style.label">Locked in Pool</header>
+				<p :class="$style.value">{{ formattedLocked }}</p>
+			</article>
 
-			<div :class="$style.cell">
-				<span :class="$style.label">{{ `${asset.key} Income` }}</span>
-				<span :class="$style.value">{{ formattedIncome }}</span>
-			</div>
+			<article :class="$style.cell">
+				<header :class="$style.label">{{ `${asset.key} Income` }}</header>
+				<p :class="$style.value">{{ formattedIncome }}</p>
+			</article>
 
-			<div :class="$style.cell">
-				<span :class="$style.label">Total assets</span>
-				<span :class="$style.value">{{ formattedTotal }}</span>
-			</div>
-		</div>
-	</div>
+			<article :class="$style.cell">
+				<header :class="$style.label">Total assets</header>
+				<p :class="$style.value">{{ formattedTotal }}</p>
+			</article>
+		</section>
+	</article>
 </template>
 
 <style lang="scss" module>
@@ -55,8 +57,14 @@ const formattedTotal = computed(() => formatNumberWithCommas(props.asset.totalAs
 }
 
 .icon {
-	width: 24px;
-	height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	svg {
+		width: 24px;
+		height: auto;
+	}
 }
 
 .valuesWrapper {

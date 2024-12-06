@@ -3,7 +3,7 @@ import VInput from '@/components/VInput.vue';
 </script>
 
 <template>
-	<div :class="$style.frameSwapOptions">
+	<article :class="$style.frameSwapOptions">
 		<VInput :max="100" placeholder="0.00">
 			<template #label>Slippage tolerance</template>
 			<template #additional>
@@ -16,7 +16,7 @@ import VInput from '@/components/VInput.vue';
 				<span :class="$style.percent">min</span>
 			</template>
 		</VInput>
-	</div>
+	</article>
 </template>
 
 <style lang="scss" module>

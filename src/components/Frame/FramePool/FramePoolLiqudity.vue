@@ -12,13 +12,16 @@ defineEmits<{
 </script>
 
 <template>
-	<div :class="$style.framePoolLiquidity">
+	<article :class="$style.framePoolLiquidity">
 		<button :class="$style.btnAdd" @click="$emit('clickAdd')">
-			<span>Add liquidity</span>
-			<IconPlusBox :class="$style.iconAdd" />
+			<header>Add liquidity</header>
+
+			<figure :class="$style.iconAdd">
+				<IconPlusBox aria-hidden="true" />
+			</figure>
 		</button>
 
-		<div :class="$style.liquidityList">
+		<ul :class="$style.liquidityList">
 			<TransitionGroup
 				:enter-active-class="$style.transitionActive"
 				:leave-active-class="$style.transitionActiveLeave"
@@ -33,8 +36,8 @@ defineEmits<{
 					@click="$emit('clickItem', liquidity)"
 				/>
 			</TransitionGroup>
-		</div>
-	</div>
+		</ul>
+	</article>
 </template>
 
 <style lang="scss" module>
@@ -57,8 +60,14 @@ defineEmits<{
 }
 
 .iconAdd {
-	height: 20px;
-	width: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	svg {
+		height: 20px;
+		width: auto;
+	}
 }
 
 .liquidityList {

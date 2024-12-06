@@ -16,10 +16,10 @@ const selectedFrameEl = computed<Component>(() => frameElements[selectedFrame.va
 </script>
 
 <template>
-	<div :class="$style.homePage">
+	<main :class="$style.homePage">
 		<ButtonSwitch v-model:selected-state="selectedFrame" :class="$style.btnSwitch" />
 
-		<div :class="$style.framesWrapper">
+		<section :class="$style.framesWrapper">
 			<Transition
 				:enter-from-class="$style.transitionFrame"
 				:leave-to-class="$style.transitionFrame"
@@ -29,8 +29,8 @@ const selectedFrameEl = computed<Component>(() => frameElements[selectedFrame.va
 			>
 				<Component :is="selectedFrameEl" />
 			</Transition>
-		</div>
-	</div>
+		</section>
+	</main>
 </template>
 
 <style lang="scss" module>

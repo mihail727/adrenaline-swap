@@ -17,8 +17,8 @@ const formattedBalance = computed(() => formatNumberWithCommas(props.assetBalanc
 </script>
 
 <template>
-	<div :class="$style.balanceInfo">
-		<span :class="$style.header">Balance</span>
+	<article :class="$style.balanceInfo">
+		<header :class="$style.header">Balance</header>
 
 		<Transition
 			:enter-active-class="$style.transitionChangeAssetActive"
@@ -27,9 +27,9 @@ const formattedBalance = computed(() => formatNumberWithCommas(props.assetBalanc
 			:leave-to-class="$style.transitionChangeAssetLeave"
 			mode="out-in"
 		>
-			<span :key="assetKey" :class="$style.balance">{{ formattedBalance }}</span>
+			<p :key="assetKey" :class="$style.balance">{{ formattedBalance }}</p>
 		</Transition>
-	</div>
+	</article>
 </template>
 
 <style lang="scss" module>

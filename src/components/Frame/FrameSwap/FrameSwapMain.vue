@@ -18,7 +18,7 @@ function onClickReplace() {
 </script>
 
 <template>
-	<div :class="$style.frameSwapMain">
+	<article :class="$style.frameSwapMain">
 		<AssetBlock
 			:asset="upperAsset"
 			:selected="selectedBlock === 0"
@@ -30,7 +30,9 @@ function onClickReplace() {
 			:class="[$style.btnReplace, selectedBlock !== undefined && $style.hasSelected]"
 			@click="onClickReplace"
 		>
-			<IconArrowCircle :class="$style.iconArrowCircle" />
+			<figure :class="$style.iconArrowCircle">
+				<IconArrowCircle aria-hidden="true" />
+			</figure>
 		</button>
 
 		<AssetBlock
@@ -47,7 +49,7 @@ function onClickReplace() {
 		<VButton :class="[$style.btnSwap, selectedBlock !== undefined && $style.hasSelected]">
 			Swap
 		</VButton>
-	</div>
+	</article>
 </template>
 
 <style lang="scss" module>
@@ -82,6 +84,9 @@ function onClickReplace() {
 }
 
 .iconArrowCircle {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 31px;
 	height: auto;
 }

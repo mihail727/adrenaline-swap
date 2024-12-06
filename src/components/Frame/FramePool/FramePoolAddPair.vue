@@ -26,14 +26,14 @@ function onClickOutside() {
 </script>
 
 <template>
-	<div v-on-click-outside="onClickOutside" :class="$style.framePoolAddPair">
+	<article v-on-click-outside="onClickOutside" :class="$style.framePoolAddPair">
 		<FrameHeader
 			title="Select pair and amount"
 			:class="selectedBlock !== undefined && $style.hasSelected"
 			@click-back="$emit('close')"
 		/>
 
-		<div :class="$style.blockWrapper">
+		<section :class="$style.blockWrapper">
 			<AssetBlock
 				:asset="upperAsset"
 				:selected="selectedBlock === 0"
@@ -46,7 +46,7 @@ function onClickOutside() {
 				:class="selectedBlock !== undefined && selectedBlock !== 1 && $style.hasSelected"
 				@click="selectedBlock = 1"
 			/>
-		</div>
+		</section>
 
 		<VButton
 			:class="[$style.btnAdd, selectedBlock !== undefined && $style.hasSelected]"
@@ -54,7 +54,7 @@ function onClickOutside() {
 		>
 			Add
 		</VButton>
-	</div>
+	</article>
 </template>
 
 <style lang="scss" module>
